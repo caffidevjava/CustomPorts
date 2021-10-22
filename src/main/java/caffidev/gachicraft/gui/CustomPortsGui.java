@@ -7,6 +7,8 @@ import net.minecraft.client.gui.*;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.WorldSettings;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Keyboard;
 
 import javax.annotation.Nullable;
@@ -15,18 +17,13 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
+@SideOnly(Side.CLIENT)
 public final class CustomPortsGui extends GuiScreen {
     private GuiTextField portTextbox;
     private boolean portOpened;
     private boolean checked;
     private boolean allowCheats;
     private boolean doUPnP;
-    //Bug - It double clicks when clicking for a first time
-    private boolean uPnPBug = false;
-    private boolean cheatsBug = false;
-    private boolean portBug = false;
-    private boolean gameModeBug = false;
-
     private String defaultGamemode;
     private String message;
     private Future<Byte> informationState; //it only refreshes once, but you can manually refresh it
