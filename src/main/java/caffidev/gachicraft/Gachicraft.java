@@ -1,19 +1,15 @@
 package caffidev.gachicraft;
 
 import caffidev.gachicraft.gui.CustomPortsGui;
-import caffidev.gachicraft.gui.InGameMenuGui;
 import caffidev.gachicraft.upnp.UPnP;
-import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiIngameMenu;
-import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiShareToLan;
-import net.minecraft.item.Item;
 import net.minecraftforge.client.event.GuiOpenEvent;
+import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 //Currently known bugs:
@@ -81,11 +77,21 @@ public class Gachicraft {
         public static void onGui(GuiOpenEvent event){
             if(event.getGui() instanceof GuiShareToLan) {
                 event.setGui(new CustomPortsGui());
-            } else if
-            (event.getGui() instanceof GuiIngameMenu){
-                event.setGui(new InGameMenuGui());
             }
         }
-    }
 
-}
+        @SubscribeEvent
+        public void onGuiPostInit(GuiScreenEvent.InitGuiEvent.Post event) {
+            if (event.getGui() instanceof GuiIngameMenu) {
+                GuiIngameMenu gui = ((GuiIngameMenu) event.getGui());
+                //через event.buttonList можно получить список кнопок после инициализации гуи
+                //А дальше можно сделать что угодно, например так
+                for (int i = 0; i < event.getButtonList().size(); i++) {
+                    if (event.getButtonList().get(i).id == 7) {
+                        event.getButtonList().get(i).enabled = true;
+                    }
+                }
+            }
+        }
+
+}}

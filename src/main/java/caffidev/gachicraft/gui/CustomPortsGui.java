@@ -32,8 +32,11 @@ public final class CustomPortsGui extends GuiScreen {
     private Future<Byte> informationState; //it only refreshes once, but you can manually refresh it
 
     private void deleteButton(GuiButton button) {
+        deleteButton(button.id);
+    }
+    private void deleteButton(int buttonid) {
         for (int i = 0; i < this.buttonList.size(); i++) {
-            if (this.buttonList.get(i).id == button.id) {
+            if (this.buttonList.get(i).id == buttonid) {
                 this.buttonList.remove(i);
             }
         }
@@ -102,7 +105,7 @@ public final class CustomPortsGui extends GuiScreen {
     public void initGui(){
         // Add basic buttons
         addPortButton();
-        this.buttonList.add(new GuiButton(1, 5, height/2 + 60, width /2 - 10, 20, "Refresh (WIP)"));
+        this.buttonList.add(new GuiButton(1, 5, height/2 + 60, width /2 - 10, 20, "Refresh "));
         this.buttonList.add(new GuiButton(3, 5, height/2 + 80, width /2 - 10, 20, "Copy port"));
         this.buttonList.add(new GuiButton(4, 5 + width / 2 , height/2 + 80, width /2 -10 , 20, "Cancel"));
 
@@ -179,6 +182,9 @@ public final class CustomPortsGui extends GuiScreen {
     protected void actionPerformed(GuiButton button) throws IOException{
         switch (button.id) {
             case 1:
+                deleteButton(6);
+                deleteButton(7);
+                deleteButton(8);
                 startGathering();
                 message = "Started gathering info again...";
                 break;
@@ -280,7 +286,7 @@ public final class CustomPortsGui extends GuiScreen {
         checked = false;
         //Starting gathering needed info...
         ExecutorService threadpool = Executors.newCachedThreadPool();
-        UPnP.FindGW(); // there is a problem
+        UPnP.Refresh(); // there is a problem
         informationState = threadpool.submit(UPnP::waitInit);
     }
 }

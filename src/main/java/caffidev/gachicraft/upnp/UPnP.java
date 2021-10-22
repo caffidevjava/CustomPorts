@@ -12,14 +12,13 @@ package caffidev.gachicraft.upnp;
 public class UPnP {
 
     private static Gateway defaultGW = null;
-    private static final GatewayFinder finder = FindGW();
+    private static GatewayFinder finder = FindGW();
 
     /**
      * Finds GW again.
      * (needed for refreshing) (it's broken atm)
      */
     public static GatewayFinder FindGW() {
-        defaultGW = null;
         return new GatewayFinder() {
 
             @Override
@@ -34,6 +33,11 @@ public class UPnP {
 
     }
 
+    public static void Refresh(){
+        finder = null;
+        defaultGW = null;
+        finder = FindGW();
+    }
     /**
      * Waits for UPnP to be initialized (takes ~3 seconds).<br>
      * It is not necessary to call this method manually before using UPnP functions
