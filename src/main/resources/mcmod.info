@@ -1,0 +1,18 @@
+[
+  {
+    "modid": "gachicraft",
+    "name": "CustomPorts",
+    "description": "free",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "ghost",
+    "updateUrl": "ghost",
+    "authorList": [
+      "ghost"
+    ],
+    "credits": "",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": []
+  }
+]
