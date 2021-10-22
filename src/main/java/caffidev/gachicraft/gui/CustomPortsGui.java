@@ -236,6 +236,9 @@ public final class CustomPortsGui extends GuiScreen {
                         defaultGamemode = "Adventure";
                         break;
                     case "Adventure":
+                        defaultGamemode = "Spectator";
+                        break;
+                    case "Spectator":
                         defaultGamemode = "Creative";
                         break;
                 }
@@ -270,11 +273,6 @@ public final class CustomPortsGui extends GuiScreen {
 
         defaultGamemode = Utils.getCurrentGameMode();
         //Default values for more convenient work
-        if (defaultGamemode == "Spectator") {
-            defaultGamemode = "Survival";
-            this.mc.ingameGUI.getChatGUI().printChatMessage(new TextComponentString("Due to mine" +
-                    "craft capabilities we can't set a spectator mode as standard. "));
-        }
         portOpened = false;
         message = "Message";
         Gachicraft.INSTANCE.port = 7777;
